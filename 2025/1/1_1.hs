@@ -1,3 +1,9 @@
+modulus :: Int
+modulus = 100
+
+initPos :: Int
+initPos = 50
+
 transform :: String -> Int
 transform ('L' : cs) = - read cs
 transform ('R' : cs) = read cs
