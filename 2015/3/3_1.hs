@@ -1,0 +1,20 @@
+import Data.List
+
+convert :: String -> [(Int, Int)]
+convert = map charToMove
+  where
+    charToMove c = case c of
+      'v' -> (1, 0)
+      '^' -> (-1, 0)
+      '>' -> (0, 1)
+      '<' -> (0, -1)
+      _ -> error "Invalid input"
+
+add :: (Int, Int) -> (Int, Int) -> (Int, Int)
+add (a, b) (c, d) = (a + c, b + d)
+
+main :: IO ()
+main = do
+  directions <- convert <$> readFile "3.in"
+  let positions = scanl add (0, 0) directions
+  print $ length $ nub positions
