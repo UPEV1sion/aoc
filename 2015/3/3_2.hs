@@ -16,5 +16,7 @@ add (a, b) (c, d) = (a + c, b + d)
 main :: IO ()
 main = do
   directions <- convert <$> readFile "3.in"
-  let positions = scanl add (0, 0) directions
-  print $ Set.size $ Set.fromList positions
+  let indexed = zip [0..] directions
+      santaPositions = Set.fromList $ scanl add (0, 0) [x | (i,x) <- indexed, even i]
+      robotPositions = Set.fromList $ scanl add (0, 0) [x | (i,x) <- indexed, odd i]
+  print $ Set.size $ Set.union santaPositions robotPositions
