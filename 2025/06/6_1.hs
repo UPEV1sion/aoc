@@ -1,4 +1,3 @@
-import Data.Maybe
 import Data.List ( transpose )
 
 evalCol :: [String] -> Int
