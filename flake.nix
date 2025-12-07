@@ -11,7 +11,11 @@
       in {
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
-            (haskellPackages.ghcWithPackages (p: [ p.split ])) 
+            (haskellPackages.ghcWithPackages (p: [ 
+              p.split 
+              p.MissingH
+              p.cryptonite
+            ])) 
           ];
         };
       }
