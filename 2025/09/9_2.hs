@@ -33,12 +33,12 @@ findLargestArea :: [Point] -> Int
 findLargestArea points = maxArea
     where
         edges = zip points (drop 1 points ++ [head points])
-        allPairs = [(p1, p2) | (p1:rest) <- tails points, p2 <- (p1:rest) ]
+        allPairs = [(p1, p2) | (p1:rest) <- tails points, p2 <- rest]
         maxArea = foldl' (\acc (p1, p2) ->
             let
                 (minX, maxX) = sortPair (fst p1, fst p2)
                 (minY, maxY) = sortPair (snd p1, snd p2)
-                manh = manhattan (minX, minY) (maxX, maxY)
+                manh = manhattan p1 p2
             in (if (manh * manh <= acc) || intersectsAny (minX, minY) (maxX, maxY) edges
                 then acc
                 else max acc (area p1 p2))
