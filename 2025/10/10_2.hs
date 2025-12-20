@@ -74,7 +74,7 @@ solveSingle buttons initGoal = fst $ minPressesMemo Map.empty initGoal
             | Just v <- Map.lookup goal memo = (v, memo)
             | otherwise =
                 let 
-                    (best, memo') = foldl' (\(curBest, curMemo) (pat, cost) ->
+                    (best, memo') = Map.foldlWithKey (\(curBest, curMemo) pat cost ->
                                                 if V.and $ V.zipWith (\p g -> p <= g && p `mod` 2 == g `mod` 2) pat goal
                                                 then 
                                                     let
@@ -82,7 +82,7 @@ solveSingle buttons initGoal = fst $ minPressesMemo Map.empty initGoal
                                                         (subAns, nextMemo) = minPressesMemo curMemo newGoal
                                                     in (min curBest (cost + 2*subAns), nextMemo)
                                                 else (curBest, curMemo)
-                                            ) (inf, memo) (Map.toList combs)
+                                            ) (inf, memo) combs
                     memoFinal = Map.insert goal best memo'
                 in (best, memoFinal)
 
