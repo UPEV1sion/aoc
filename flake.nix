@@ -15,6 +15,7 @@
               p.split 
               p.MissingH
               p.cryptonite
+              p.vector
             ])) 
           ];
         };
