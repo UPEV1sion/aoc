@@ -16,6 +16,7 @@
               p.MissingH
               p.cryptonite
               p.vector
+              p.regex-pcre
             ])) 
           ];
         };
